@@ -1,0 +1,33 @@
+micronaut:
+  application:
+    name: micronaut-graal
+  executors:
+    io:
+      type: fixed
+      nThreads: 75
+postgres:
+  reactive:
+    client:
+      port: 55432
+      host: localhost
+      database: application
+      user: application
+      password: application
+      maxSize: 5
+endpoints:
+  beans:
+    enabled: true
+    sensitive: false
+  info:
+    enabled: true
+    sensitive: false
+  health:
+    enabled: true
+    sensitive: false
+    details-visible: ANONYMOUS
+  loggers:
+    enabled: true
+    sensitive: false
+  env:
+    enabled: true
+    sensitive: false

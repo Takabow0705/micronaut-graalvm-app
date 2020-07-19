@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+  rdb1:
+    build: docker/postgres
+    container_name: "rdb1"
+    ports:
+    - 55432:5432
+    environment:
+      - POSTGRES_USER=application
+      - POSTGRES_PASSWORD=application
+      - POSTGRES_DB=application
+  pgadmin4:
+    build: docker/pgadmin4
+    container_name: "pgadmin4"
+    ports:
+    - 8889:80
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin
+      - PGADMIN_DEFAULT_PASSWORD=admin
+  mongodb:
+    build: docker/mongodb
+    container_name: "mongodb"
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+  mongo-express:
+    build: docker/mongo-express
+    container_name: "mongo-express"
+    restart: always
+    ports:
+      - 58081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+      ME_CONFIG_MONGODB_ADMINPASSWORD: admin
+      ME_CONFIG_BASICAUTH_USERNAME: application
+      ME_CONFIG_BASICAUTH_PASSWORD: application
+      ME_CONFIG_MONGODB_SERVER: mongodb

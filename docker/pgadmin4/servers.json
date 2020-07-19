@@ -1,0 +1,10 @@
+{
+  "Servers": {
+    "1": {
+      "Name": "Application server",
+      "Port": 5432,
+      "Username": "application",
+      "Host": "rdb1"
+    }
+  }
+}

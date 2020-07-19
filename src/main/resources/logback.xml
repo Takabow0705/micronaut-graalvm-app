@@ -1,0 +1,30 @@
+<configuration>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder class="net.logstash.logback.encoder.LogstashEncoder" >
+                <jsonGeneratorDecorator class="net.logstash.logback.decorate.PrettyPrintingJsonGeneratorDecorator"/>
+            </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>./log/micronaut-graal.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>./log/micronaut-graal.%d{yyyy-MM-dd-HH:mm:ss}.log</fileNamePattern>
+            <maxHistory>3</maxHistory>
+        </rollingPolicy>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder" ></encoder>
+    </appender>
+
+    <appender name="MONGO" class="ch.qos.logback.contrib.mongodb.MongoDBLoggingEventAppender">
+        <uri>mongodb://admin:admin@localhost/logs.micronaut-graal?ssl=false;authSource=admin</uri>
+    </appender>
+
+    <logger name="com.netflix.spectator.gc" level="DEBUG" />
+
+    <root level="DEBUG">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="FILE" />
+        <appender-ref ref="MONGO" />
+    </root>
+
+</configuration>
